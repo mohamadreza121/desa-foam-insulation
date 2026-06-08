@@ -40,12 +40,36 @@ const services = [
 ];
 
 const projectImages = [
-  "/images/projects/project-01.jpg",
-  "/images/projects/project-02.jpg",
-  "/images/projects/project-03.jpg",
-  "/images/projects/project-04.jpg",
-  "/images/projects/project-05.jpg",
-  "/images/projects/project-06.jpg",
+  {
+    title: "Drywall Installation",
+    category: "Drywall",
+    image: "/images/projects/project-01.jpg",
+  },
+  {
+    title: "Spray Foam Roof Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-02.jpg",
+  },
+  {
+    title: "Spray Foam Ceiling Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-03.jpg",
+  },
+  {
+    title: "Spray Foam Wall Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-04.jpg",
+  },
+  {
+    title: "Blown-In Attic Insulation",
+    category: "Attic",
+    image: "/images/projects/project-05.jpg",
+  },
+  {
+    title: "Batt Insulation Materials",
+    category: "Batt",
+    image: "/images/projects/project-06.jpg",
+  },
 ];
 
 export default function HomePage() {
@@ -260,25 +284,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {projectImages.map((image, index) => (
+            {projectImages.map((project) => (
               <Link
                 href="/projects"
-                key={image}
+                key={project.image}
                 className="group relative h-72 overflow-hidden rounded-2xl bg-dark shadow-sm"
               >
                 <img
-                  src={image}
-                  alt={`DESA Foam Insulation project ${index + 1}`}
+                  src={project.image}
+                  alt={`${project.title} by DESA Foam Insulation`}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-80" />
 
                 <div className="absolute bottom-5 left-5 right-5">
-                  <p className="font-bold text-white">
-                    Project Work #{index + 1}
+                  <p className="mb-2 inline-flex rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                    {project.category}
                   </p>
-                  <p className="mt-1 text-sm text-gray-200">
+
+                  <h3 className="text-xl font-black text-white">
+                    {project.title}
+                  </h3>
+
+                  <p className="mt-1 text-sm font-medium text-gray-200">
                     View full gallery
                   </p>
                 </div>
