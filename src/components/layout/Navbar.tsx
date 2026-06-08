@@ -45,10 +45,10 @@ export default function Navbar() {
         </nav>
 
         <Link
-          href="/booking"
-          className="hidden rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-red-700 lg:inline-flex"
+          href="/project-assessment"
+          className="rounded-lg bg-primary px-5 py-3 font-bold text-white transition hover:bg-red-700"
         >
-          Book Online
+          Start a Project
         </Link>
 
         <button
@@ -79,13 +79,13 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-
+              
               <Link
-                href="/booking"
+                href="/project-assessment"
                 className="rounded-lg bg-primary px-5 py-3 text-center font-semibold text-white"
                 onClick={() => setIsOpen(false)}
               >
-                Book Online
+                Start a Project
               </Link>
             </div>
           </motion.nav>

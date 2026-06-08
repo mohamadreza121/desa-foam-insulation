@@ -46,3 +46,19 @@ h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+main {
+  animation: page-enter-soft-blur 0.28s ease-out both;
+}
+
+@keyframes page-enter-soft-blur {
+  from {
+    opacity: 0.94;
+    filter: blur(1.5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}

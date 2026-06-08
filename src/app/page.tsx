@@ -4,9 +4,11 @@ import {
   Clock,
   ShieldCheck,
   Trophy,
-  Star,
   CheckCircle2,
 } from "lucide-react";
+import GoogleReviews from "@/components/sections/GoogleReviews";
+
+const siteUrl = "https://desafoaminsulation.com";
 
 const whyChooseUs = [
   {
@@ -37,21 +39,6 @@ const services = [
   "Foam Slab Jacking",
 ];
 
-const reviews = [
-  {
-    name: "Google Review",
-    text: "Professional service, excellent communication, and outstanding workmanship. The project was completed on time and exceeded expectations.",
-  },
-  {
-    name: "Google Review",
-    text: "Very knowledgeable team that delivered high-quality work. Clean job site, fair pricing, and great attention to detail.",
-  },
-  {
-    name: "Google Review",
-    text: "From the initial quote to project completion, everything was handled professionally. Highly recommend DESA Foam Insulation.",
-  },
-];
-
 const projectImages = [
   "/images/projects/project-01.jpg",
   "/images/projects/project-02.jpg",
@@ -62,8 +49,63 @@ const projectImages = [
 ];
 
 export default function HomePage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "DESA Foam Insulation",
+    url: siteUrl,
+    image: `${siteUrl}/images/og/desa-og.jpg`,
+    logo: `${siteUrl}/images/logo.png`,
+    telephone: "+16479602090",
+    email: "dee@desafoaminsulation.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "310 Millway Avenue #6",
+      addressLocality: "Concord",
+      addressRegion: "ON",
+      addressCountry: "CA",
+    },
+    description:
+      "DESA Foam Insulation provides spray foam insulation, drywall, batt insulation, attic insulation, steel framing, fireproofing, and foam slab jacking services in Toronto and the GTA.",
+    areaServed: [
+      "Toronto",
+      "GTA",
+      "Concord",
+      "North York",
+      "Scarborough",
+      "Etobicoke",
+      "Mississauga",
+      "Vaughan",
+      "Markham",
+      "Richmond Hill",
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "07:00",
+        closes: "17:00",
+      },
+    ],
+    sameAs: ["https://share.google/3ZvYNsMYAwMOyHoHw"],
+    makesOffer: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service,
+      },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black pt-24">
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -94,10 +136,10 @@ export default function HomePage() {
 
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              href="/booking"
+              href="/project-assessment"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-center font-bold text-white transition hover:bg-red-700"
             >
-              Request a Free Estimate
+              Start a Project
               <ArrowRight size={20} />
             </Link>
 
@@ -108,7 +150,6 @@ export default function HomePage() {
               View Services
             </Link>
           </div>
-
         </div>
       </section>
 
@@ -151,72 +192,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
-        <div className="container-custom">
-          <div className="mx-auto mb-14 max-w-4xl text-center">
-            <p className="mb-3 font-bold uppercase tracking-[0.25em] text-primary">
-              Google Reviews
-            </p>
 
-            <h2 className="text-4xl font-black text-dark md:text-5xl">
-              Trusted By Homeowners & Businesses Across Toronto
-            </h2>
-
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-              Our reputation is built on quality workmanship, professionalism,
-              and delivering projects on time.
-            </p>
-
-            <div className="mt-8 flex items-center justify-center gap-1 text-yellow-500">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} size={38} fill="currentColor" />
-              ))}
-            </div>
-
-            <p className="mt-3 text-xl font-bold text-dark">
-              Highly Rated on Google
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {reviews.map((review) => (
-              <article
-                key={review.text}
-                className="rounded-2xl border border-black/5 bg-light p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="mb-5 flex gap-1 text-yellow-500">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={20} fill="currentColor" />
-                  ))}
-                </div>
-
-                <p className="text-base leading-8 text-gray-700">
-                  “{review.text}”
-                </p>
-
-                <div className="mt-6">
-                  <p className="font-black text-dark">{review.name}</p>
-
-                  <p className="text-sm font-semibold text-primary">
-                    Verified Google Review
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-14 text-center">
-            <a
-              href="https://share.google/3ZvYNsMYAwMOyHoHw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex rounded-lg bg-primary px-8 py-4 font-bold text-white transition hover:bg-red-700"
-            >
-              Read More Reviews on Google
-            </a>
-          </div>
-        </div>
-      </section>
+      <GoogleReviews />
 
       <section className="bg-dark py-20 text-white md:py-28">
         <div className="container-custom">
@@ -328,10 +305,10 @@ export default function HomePage() {
 
           <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              href="/booking"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 font-bold text-white transition hover:bg-red-700"
+              href="/project-assessment"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-center font-bold text-white transition hover:bg-red-700"
             >
-              Request a Free Estimate
+              Start a Project
               <ArrowRight size={20} />
             </Link>
 

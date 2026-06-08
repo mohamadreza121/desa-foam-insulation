@@ -3,6 +3,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import RouteProgress from "@/components/animations/RouteProgress";
 
 export const metadata: Metadata = {
   title: "DESA Foam Insulation Toronto",
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <RouteProgress />
         <Navbar />
 
         <main>{children}</main>
