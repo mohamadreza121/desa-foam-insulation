@@ -131,7 +131,7 @@ export default function ContactPage() {
                   <Clock className="mt-1 shrink-0 text-primary" />
                   <div>
                     <p className="font-black">Business Hours</p>
-                    <p className="text-gray-300">8:00 AM - 6:00 PM</p>
+                    <p className="text-gray-300">7:00 AM - 5:00 PM</p>
                   </div>
                 </div>
               </div>
