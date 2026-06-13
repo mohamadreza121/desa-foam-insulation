@@ -1,221 +1,318 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { useState } from "react";
 import {
+  ArrowRight,
+  ClipboardList,
+  Clock,
   Mail,
   MapPin,
   Phone,
-  Clock,
-  Send,
-  CheckCircle2,
-  SprayCan,
 } from "lucide-react";
 
-const services = [
-  "Spray Foam Insulation",
-  "Drywall",
-  "Batt Insulation",
-  "Attic Insulation",
-  "Attic Insulation Removal",
-  "Steel Framing",
-  "Fireproofing",
-  "Foam Slab Jacking",
+const siteUrl = "https://desafoaminsulation.com";
+
+export const metadata: Metadata = {
+  title: "Contact DESA Foam Insulation | Toronto & GTA",
+  description:
+    "Contact DESA Foam Insulation for insulation and construction services in Toronto and the GTA. Call, email, or submit a project assessment.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact DESA Foam Insulation | Toronto & GTA",
+    description:
+      "Contact DESA Foam Insulation or submit a project assessment for insulation and construction services in Toronto and the GTA.",
+    url: `${siteUrl}/contact`,
+    siteName: "DESA Foam Insulation",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DESA Foam Insulation",
+      },
+    ],
+    locale: "en_CA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact DESA Foam Insulation | Toronto & GTA",
+    description:
+      "Contact DESA Foam Insulation or submit a project assessment for service in Toronto and the GTA.",
+    images: ["/images/logo.png"],
+  },
+};
+
+const contactMethods = [
+  {
+    icon: Phone,
+    title: "Call Us",
+    description:
+      "Speak directly with our team about your property, service needs, or project timeline.",
+    label: "(647) 960-2090",
+    href: "tel:+16479602090",
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    description:
+      "Send us a general question or contact our team regarding an existing project.",
+    label: "dee@desafoaminsulation.com",
+    href: "mailto:dee@desafoaminsulation.com",
+  },
+  {
+    icon: MapPin,
+    title: "Our Location",
+    description:
+      "DESA Foam Insulation serves residential and commercial properties throughout Toronto and the GTA.",
+    label: "310 Millway Avenue #6, Concord, ON L4K 3W3",
+    href: "https://www.google.com/maps/search/?api=1&query=310+Millway+Avenue+%236+Concord+ON+L4K+3W3",
+  },
 ];
 
 export default function ContactPage() {
-  const [status, setStatus] = useState("");
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const form = new FormData(event.currentTarget);
-
-    const name = String(form.get("name"));
-    const email = String(form.get("email"));
-    const phone = String(form.get("phone"));
-    const service = String(form.get("service"));
-    const message = String(form.get("message"));
-
-    const subject = encodeURIComponent(`Website Quote Request - ${service}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`
-    );
-
-    window.location.href = `mailto:dee@desafoaminsulation.com?subject=${subject}&body=${body}`;
-    setStatus("Your email app should open with the message ready to send.");
-  }
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact DESA Foam Insulation",
+    url: `${siteUrl}/contact`,
+    description:
+      "Contact DESA Foam Insulation for insulation and construction services in Toronto and the GTA.",
+    mainEntity: {
+      "@type": "LocalBusiness",
+      name: "DESA Foam Insulation",
+      url: siteUrl,
+      telephone: "+16479602090",
+      email: "dee@desafoaminsulation.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "310 Millway Avenue #6",
+        addressLocality: "Concord",
+        addressRegion: "ON",
+        postalCode: "L4K 3W3",
+        addressCountry: "CA",
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ],
+          opens: "07:00",
+          closes: "17:00",
+        },
+      ],
+    },
+  };
 
   return (
-    <main className="bg-light">
-      <section className="relative overflow-hidden bg-dark pb-24 pt-40 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(179,32,37,0.35),transparent_30%),radial-gradient(circle_at_80%_40%,rgba(30,136,229,0.2),transparent_30%)]" />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(contactPageSchema),
+        }}
+      />
 
-        <div className="container-custom relative z-10 text-center">
-          <p className="mb-4 font-bold uppercase tracking-[0.25em] text-primary">
-            Contact DESA Foam
-          </p>
+      <main className="bg-light">
+        <section className="relative overflow-hidden bg-dark pb-24 pt-40 text-white">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(179,32,37,0.35),transparent_30%),radial-gradient(circle_at_80%_40%,rgba(30,136,229,0.2),transparent_30%)]" />
 
-          <h1 className="mx-auto max-w-5xl text-5xl font-black md:text-7xl">
-            Let’s talk about your next project.
-          </h1>
+          <div className="container-custom relative z-10 text-center">
+            <p className="mb-4 font-bold uppercase tracking-[0.25em] text-primary">
+              Contact DESA Foam
+            </p>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            Request a quote for insulation, drywall, framing, fireproofing, or
-            foam slab jacking services in Toronto.
-          </p>
-        </div>
-      </section>
+            <h1 className="mx-auto max-w-5xl text-5xl font-black md:text-7xl">
+              Get in touch with our team.
+            </h1>
 
-      <section className="container-custom py-24">
-        <div className="grid overflow-hidden rounded-3xl bg-white shadow-2xl lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="relative overflow-hidden bg-dark p-8 text-white md:p-12">
-            <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/30 blur-2xl" />
-            <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-accent/20 blur-2xl" />
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+              Contact us with general questions, or complete our project
+              assessment so our team can review your service needs, location,
+              timeline, and project details.
+            </p>
+          </div>
+        </section>
 
-            <div className="relative z-10">
-              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-primary">
-                <SprayCan size={38} />
+        <section className="container-custom py-20 md:py-28">
+          <div className="grid gap-8 md:grid-cols-3">
+            {contactMethods.map((method) => {
+              const Icon = method.icon;
+              const isExternal = method.href.startsWith("http");
+
+              return (
+                <article
+                  key={method.title}
+                  className="flex flex-col rounded-3xl border border-black/5 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Icon size={30} />
+                  </div>
+
+                  <h2 className="text-2xl font-black text-dark">
+                    {method.title}
+                  </h2>
+
+                  <p className="mt-4 flex-1 leading-7 text-gray-600">
+                    {method.description}
+                  </p>
+
+                  <Link
+                    href={method.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className="mt-6 break-words font-bold text-primary transition hover:text-red-700"
+                  >
+                    {method.label}
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-20 md:py-28">
+          <div className="container-custom">
+            <div className="grid overflow-hidden rounded-3xl bg-dark text-white shadow-2xl lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="relative overflow-hidden p-8 md:p-12">
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/30 blur-2xl" />
+                <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-accent/20 blur-2xl" />
+
+                <div className="relative z-10">
+                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-primary">
+                    <ClipboardList size={38} />
+                  </div>
+
+                  <h2 className="text-4xl font-black">
+                    Have a project in mind?
+                  </h2>
+
+                  <p className="mt-5 text-lg leading-8 text-gray-300">
+                    Complete the project assessment with details about your
+                    property, requested service, project size, location,
+                    timeline, and budget.
+                  </p>
+
+                  <Link
+                    href="/project-assessment"
+                    className="mt-8 inline-flex items-center gap-3 rounded-xl bg-primary px-8 py-4 font-black text-white transition hover:bg-red-700"
+                  >
+                    Start Project Assessment
+                    <ArrowRight size={20} />
+                  </Link>
+                </div>
               </div>
 
-              <h2 className="mb-5 text-4xl font-black">
-                Fast quotes. Clear communication. Professional work.
-              </h2>
+              <div className="bg-neutral-900 p-8 md:p-12">
+                <p className="font-bold uppercase tracking-[0.25em] text-primary">
+                  What Happens Next
+                </p>
 
-              <p className="mb-10 text-lg leading-8 text-gray-300">
-                Tell us what service you need and our team will review your
-                request. We’ll help you choose the right solution for your
-                property.
-              </p>
+                <h2 className="mt-4 text-4xl font-black">
+                  A clearer way to start your project.
+                </h2>
 
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <MapPin className="mt-1 shrink-0 text-primary" />
-                  <div>
-                    <p className="font-black">Address</p>
-                    <p className="text-gray-300">
-                      310 Millway Avenue #6,
-                      <br />
-                      Concord, ON, L4K 3W3
-                    </p>
+                <div className="mt-10 space-y-8">
+                  <div className="flex gap-5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-black">
+                      1
+                    </span>
+
+                    <div>
+                      <h3 className="text-xl font-black">
+                        Submit your project details
+                      </h3>
+
+                      <p className="mt-2 leading-7 text-gray-300">
+                        Tell us which service you need and provide the key
+                        information about your property and project.
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex gap-4">
-                  <Phone className="mt-1 shrink-0 text-primary" />
-                  <div>
-                    <p className="font-black">Phone</p>
-                    <Link
-                      href="tel:6479602090"
-                      className="text-gray-300 hover:text-primary"
-                    >
-                      (647) 960-2090
-                    </Link>
+                  <div className="flex gap-5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-black">
+                      2
+                    </span>
+
+                    <div>
+                      <h3 className="text-xl font-black">
+                        Our team reviews the request
+                      </h3>
+
+                      <p className="mt-2 leading-7 text-gray-300">
+                        We review the project scope, location, timeline, budget,
+                        and any photos or supporting information.
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex gap-4">
-                  <Mail className="mt-1 shrink-0 text-primary" />
-                  <div>
-                    <p className="font-black">Email</p>
-                    <Link
-                      href="mailto:dee@desafoaminsulation.com"
-                      className="text-gray-300 hover:text-primary"
-                    >
-                      dee@desafoaminsulation.com
-                    </Link>
-                  </div>
-                </div>
+                  <div className="flex gap-5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-black">
+                      3
+                    </span>
 
-                <div className="flex gap-4">
-                  <Clock className="mt-1 shrink-0 text-primary" />
-                  <div>
-                    <p className="font-black">Business Hours</p>
-                    <p className="text-gray-300">Mon - Sat: 7AM - 5PM</p>
+                    <div>
+                      <h3 className="text-xl font-black">
+                        We contact you about the next step
+                      </h3>
+
+                      <p className="mt-2 leading-7 text-gray-300">
+                        A member of our team will follow up based on the project
+                        details and current availability.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <form onSubmit={handleSubmit} className="relative p-8 md:p-12">
-            <div className="pointer-events-none absolute right-8 top-8 flex gap-2 opacity-20">
-              <span className="h-8 w-8 rounded-full bg-primary" />
-              <span className="mt-8 h-5 w-5 rounded-full bg-accent" />
-              <span className="h-12 w-12 rounded-full bg-primary" />
-            </div>
-
-            <h2 className="mb-2 text-3xl font-black text-dark">
-              Request a Free Quote
-            </h2>
-
-            <p className="mb-8 text-gray-600">
-              Fill out the form below and we’ll get back to you as soon as
-              possible.
-            </p>
-
-            <div className="grid gap-5 md:grid-cols-2">
-              <input
-                name="name"
-                required
-                placeholder="Your Name"
-                className="rounded-xl border border-black/10 bg-light px-5 py-4 font-semibold outline-none transition focus:border-primary focus:bg-white"
-              />
-
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Email Address"
-                className="rounded-xl border border-black/10 bg-light px-5 py-4 font-semibold outline-none transition focus:border-primary focus:bg-white"
-              />
-
-              <input
-                name="phone"
-                required
-                placeholder="Phone Number"
-                className="rounded-xl border border-black/10 bg-light px-5 py-4 font-semibold outline-none transition focus:border-primary focus:bg-white"
-              />
-
-              <select
-                name="service"
-                required
-                className="rounded-xl border border-black/10 bg-light px-5 py-4 font-semibold text-gray-600 outline-none transition focus:border-primary focus:bg-white"
-              >
-                <option value="">Select Service</option>
-                {services.map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <textarea
-              name="message"
-              required
-              placeholder="Tell us about your project..."
-              rows={7}
-              className="mt-5 w-full rounded-xl border border-black/10 bg-light px-5 py-4 font-semibold outline-none transition focus:border-primary focus:bg-white"
-            />
-
-            <button
-              type="submit"
-              className="mt-6 inline-flex items-center gap-3 rounded-xl bg-primary px-8 py-4 font-black text-white transition hover:bg-red-700"
-            >
-              Send Request
-              <Send size={18} />
-            </button>
-
-            {status && (
-              <p className="mt-5 flex items-center gap-2 font-bold text-green-700">
-                <CheckCircle2 size={20} />
-                {status}
+        <section className="container-custom py-20 md:py-28">
+          <div className="grid items-center gap-10 rounded-3xl border border-black/5 bg-white p-8 shadow-sm md:grid-cols-2 md:p-12">
+            <div>
+              <p className="font-bold uppercase tracking-[0.25em] text-primary">
+                Business Hours
               </p>
-            )}
-          </form>
-        </div>
-      </section>
-    </main>
+
+              <h2 className="mt-4 text-4xl font-black text-dark">
+                Available six days a week.
+              </h2>
+
+              <p className="mt-5 max-w-xl text-lg leading-8 text-gray-600">
+                Contact our team during regular business hours for general
+                questions and existing project inquiries.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-light p-8">
+              <div className="flex gap-4">
+                <Clock className="mt-1 shrink-0 text-primary" size={28} />
+
+                <div>
+                  <p className="text-xl font-black text-dark">
+                    Monday – Saturday
+                  </p>
+                  <p className="mt-1 text-lg text-gray-600">
+                    7:00 AM – 5:00 PM
+                  </p>
+
+                  <p className="mt-5 text-xl font-black text-dark">Sunday</p>
+                  <p className="mt-1 text-lg text-gray-600">Closed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

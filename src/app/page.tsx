@@ -328,8 +328,8 @@ export default function HomePage() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            Request a free estimate today and let DESA Foam Insulation help you
-            plan your next project with confidence.
+            Tell us about your project and let DESA Foam Insulation review your
+            service needs, location, timeline, and project details.
           </p>
 
           <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
