@@ -67,7 +67,7 @@ const contactMethods = [
     description:
       "DESA Foam Insulation serves residential and commercial properties throughout Toronto and the GTA.",
     label: "310 Millway Avenue #6, Concord, ON L4K 3W3",
-    href: "https://www.google.com/maps/search/?api=1&query=310+Millway+Avenue+%236+Concord+ON+L4K+3W3",
+    href: "https://www.google.com/maps/place/Desa+Foam+Insulation/@43.8015398,-79.5322563,17z/data=!3m1!4b1!4m6!3m5!1s0x882ac516a673ffff:0x4e032c3227d1fa25!8m2!3d43.8015398!4d-79.5296814!16s%2Fg%2F11p5rmly5l?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D",
   },
 ];
 
