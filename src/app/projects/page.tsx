@@ -70,21 +70,6 @@ const projects = [
     image: "/images/projects/project-10.jpg",
   },
   {
-    title: "Batt Insulation Installation",
-    category: "Batt",
-    image: "/images/projects/project-11.jpg",
-  },
-  {
-    title: "Concrete Slab Jacking",
-    category: "Slab Jacking",
-    image: "/images/projects/project-12.jpg",
-  },
-  {
-    title: "Polyurethane Foam Slab Lifting",
-    category: "Slab Jacking",
-    image: "/images/projects/project-13.jpg",
-  },
-  {
     title: "Steel Ceiling Framing",
     category: "Steel Framing",
     image: "/images/projects/project-14.jpg",
@@ -120,16 +105,6 @@ const projects = [
     image: "/images/projects/project-20.jpg",
   },
   {
-    title: "Spray Fireproofing Application",
-    category: "Fireproofing",
-    image: "/images/projects/project-21.jpg",
-  },
-  {
-    title: "Structural Fireproofing",
-    category: "Fireproofing",
-    image: "/images/projects/project-22.jpg",
-  },
-  {
     title: "Cementitious Fireproofing Close-Up",
     category: "Fireproofing",
     image: "/images/projects/project-23.jpg",
@@ -143,11 +118,6 @@ const projects = [
     title: "Attic Framing Preparation",
     category: "Attic",
     image: "/images/projects/project-25.jpg",
-  },
-  {
-    title: "Blown-In Attic Insulation",
-    category: "Attic",
-    image: "/images/projects/project-26.jpg",
   },
   {
     title: "Finished Attic Insulation",
@@ -178,6 +148,72 @@ const projects = [
     title: "Drywall Taping and Finishing",
     category: "Drywall",
     image: "/images/projects/project-32.jpg",
+  },
+  {
+  id: 33,
+  title: "Drywall Panel Installation",
+  category: "Drywall",
+  image: "/images/projects/project-33.jpg",
+  },
+  {
+    id: 34,
+    title: "Spray Foam Perimeter Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-34.jpg",
+  },
+  {
+    id: 35,
+    title: "Spray Foam Wall Cavity Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-35.jpg",
+  },
+  {
+    id: 36,
+    title: "Spray Foam Ceiling Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-36.jpg",
+  },
+  {
+    id: 37,
+    title: "Spray Foam Application Around Ductwork",
+    category: "Spray Foam",
+    image: "/images/projects/project-37.jpg",
+  },
+  {
+    id: 38,
+    title: "Closed-Cell Spray Foam Wall Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-38.jpg",
+  },
+  {
+    id: 39,
+    title: "Spray Foam Ceiling Installation",
+    category: "Spray Foam",
+    image: "/images/projects/project-39.jpg",
+  },
+  {
+    id: 40,
+    title: "Spray Foam Roof and Ceiling Insulation",
+    category: "Spray Foam",
+    image: "/images/projects/project-40.jpg",
+  },
+  {
+    id: 41,
+    title: "Spray Foam Wall Installation",
+    category: "Spray Foam",
+    image: "/images/projects/project-41.jpg",
+  },
+  {
+  id: 42,
+  title: "Cementitious Fireproofing Application",
+  category: "Fireproofing",
+  image: "/images/projects/project-42.jpg",
+  },
+  {
+    id: 43,
+    title: "Spray-Applied Fireproofing Installation",
+    category: "Fireproofing",
+    image: "/images/projects/project-43.jpg",
   },
 ];
 
@@ -238,7 +274,7 @@ export default function ProjectsPage() {
               <div className="grid grid-cols-2 gap-6">
                 {[
                   ["20+", "Years Experience"],
-                  ["32", "Project Photos"],
+                  ["Projects","Gallery"],
                   ["8", "Core Services"],
                   ["100%", "Professional Finish"],
                 ].map(([number, label]) => (
