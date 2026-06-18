@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Batt Insulation";
 const serviceSlug = "/services/batt-insulation";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/batt-hero.png";
+
+const pageTitle = "Batt Insulation Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
   "Professional batt insulation services in Toronto and the GTA using fiberglass and mineral wool batts for residential and commercial projects.";
 
 export const metadata: Metadata = {
-  title: "Batt Insulation Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Batt Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Batt insulation service by DESA Foam Insulation",
+        alt: "Professional batt insulation service in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Batt Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function BattInsulationPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Fiberglass and mineral wool batt insulation installation",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function BattInsulationPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +167,7 @@ export default function BattInsulationPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -102,9 +176,9 @@ export default function BattInsulationPage() {
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
                 Reliable fiberglass and mineral wool batt insulation services
-                for residential and commercial projects. Desa Foam helps
-                improve comfort, reduce energy costs, and create quieter indoor
-                spaces.
+                for residential and commercial projects. DESA Foam Insulation
+                helps improve comfort, reduce energy costs, and create quieter
+                indoor spaces.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -126,10 +200,11 @@ export default function BattInsulationPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/batt-hero.png"
-                alt="Batt insulation installed inside wall framing"
+                src={serviceImage}
+                alt="Batt insulation installed inside wall framing in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -153,7 +228,7 @@ export default function BattInsulationPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation installs high-quality fiberglass and
+                  DESA Foam Insulation installs high-quality fiberglass and
                   mineral wool batts with careful attention to detail. Our team
                   fits each section properly between studs and joists to improve
                   temperature control and sound reduction.
@@ -200,9 +275,10 @@ export default function BattInsulationPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/batt-installing.jpg"
-                  alt="Worker installing batt insulation inside wall framing"
+                  alt="Professional installing batt insulation inside wall framing"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -230,27 +306,29 @@ export default function BattInsulationPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/batt-insulation-removal-and-replacement.jpg"
-                  alt="Batt insulation installed in a residential wall"
+                  alt="Batt insulation removal and replacement in a residential wall"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Insulation Removal & Replacement
+                    Insulation Removal &amp; Replacement
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Over time, insulation can become damaged, damp, or
-                    ineffective. Our team provides safe removal followed by
-                    expert replacement with premium batt insulation.
+                    Over time, insulation can become damaged, damp, compressed,
+                    or ineffective. Our team provides careful removal followed
+                    by professional replacement with high-quality batt
+                    insulation.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
                     We remove old or contaminated materials and restore your
-                    space with clean, efficient insulation built for long-term
-                    comfort and performance.
+                    space with clean, efficient insulation designed for
+                    long-term comfort and performance.
                   </p>
                 </div>
               </article>

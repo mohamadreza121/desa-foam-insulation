@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Spray Foam Insulation";
 const serviceSlug = "/services/spray-foam-insulation";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/spray-foam-hero.jpeg";
+
+const pageTitle = "Spray Foam Insulation Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
-  "Professional spray foam insulation services in Toronto and the GTA for residential and commercial projects, including open-cell and closed-cell spray foam.";
+  "Professional open-cell and closed-cell spray foam insulation services in Toronto and the GTA for residential, commercial, renovation, and new construction projects.";
 
 export const metadata: Metadata = {
-  title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Spray foam insulation service by DESA Foam Insulation",
+        alt: "Professional spray foam insulation service in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function SprayFoamInsulationPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Open-cell and closed-cell spray foam insulation installation",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function SprayFoamInsulationPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +167,7 @@ export default function SprayFoamInsulationPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -101,10 +175,11 @@ export default function SprayFoamInsulationPage() {
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
-                Trusted spray foam insulation services for residential and
-                commercial projects across Ontario. With over 20 years of
-                experience, Desa Foam delivers professional workmanship,
-                long-lasting performance, and improved energy efficiency.
+                Professional spray foam insulation services for residential and
+                commercial projects across Toronto and the GTA. With over 20
+                years of experience, DESA Foam Insulation delivers dependable
+                workmanship, long-lasting performance, and improved energy
+                efficiency.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -127,10 +202,11 @@ export default function SprayFoamInsulationPage() {
             <div className="relative">
               <div className="overflow-hidden rounded-3xl shadow-2xl">
                 <Image
-                  src="/images/services/spray-foam-hero.jpeg"
-                  alt="Spray foam insulation being applied to a roof"
+                  src={serviceImage}
+                  alt="Professional spray foam insulation applied to a roof assembly"
                   width={900}
                   height={650}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-[420px] w-full object-cover"
                   priority
                 />
@@ -154,15 +230,16 @@ export default function SprayFoamInsulationPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Our certified team uses high-performance spray foam products
-                  to create reliable air sealing and thermal protection for new
-                  construction, renovations, and retrofit projects.
+                  Our experienced team uses high-performance spray foam products
+                  to provide dependable air sealing and thermal protection for
+                  new construction, renovations, additions, and retrofit
+                  projects.
                 </p>
 
                 <p>
                   By combining industry experience with modern application
-                  technology, we focus on safety, quality, energy savings, and
-                  customer satisfaction on every job.
+                  equipment, we focus on safety, consistent coverage, energy
+                  performance, and professional results on every project.
                 </p>
               </div>
             </div>
@@ -203,6 +280,7 @@ export default function SprayFoamInsulationPage() {
                   alt="Open-cell spray foam insulation installed between roof joists"
                   width={900}
                   height={650}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -212,16 +290,17 @@ export default function SprayFoamInsulationPage() {
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Open-cell spray foam is lightweight, flexible, and expands
-                    to fill cracks, gaps, and hard-to-reach spaces. Its soft,
-                    sponge-like texture also helps absorb sound, making it a
-                    great choice for interior walls, rooms, and floors.
+                    Open-cell spray foam is lightweight and flexible, expanding
+                    to fill cracks, gaps, and hard-to-reach spaces. Its softer,
+                    sponge-like structure can also help reduce sound transfer,
+                    making it useful for interior walls, ceilings, rooms, and
+                    floor assemblies.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    It is a cost-effective option for improving comfort and
-                    reducing air leaks where moisture resistance is not the main
-                    priority.
+                    It is a practical option for improving indoor comfort and
+                    reducing uncontrolled air leakage where a vapour-impermeable
+                    insulation system is not required.
                   </p>
                 </div>
               </article>
@@ -229,9 +308,10 @@ export default function SprayFoamInsulationPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/closed-cell-spray-foam.png"
-                  alt="Closed-cell spray foam being applied to a wall"
+                  alt="Closed-cell spray foam insulation being applied to a wall"
                   width={900}
                   height={650}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -241,15 +321,17 @@ export default function SprayFoamInsulationPage() {
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Closed-cell spray foam creates a dense, rigid, airtight
-                    barrier with strong thermal resistance. It helps block air
-                    infiltration, resist moisture, and add strength to walls,
-                    roofs, and building assemblies.
+                    Closed-cell spray foam creates a dense, rigid, and highly
+                    effective insulation layer. It helps reduce air
+                    infiltration, control moisture movement, and improve the
+                    thermal performance of walls, roofs, and other building
+                    assemblies.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    With a high R-value per inch, it is ideal for areas that
-                    need maximum insulation performance in limited space.
+                    Its high insulation value per inch makes it suitable for
+                    projects that require strong thermal performance within
+                    limited cavity space.
                   </p>
                 </div>
               </article>
@@ -262,7 +344,7 @@ export default function SprayFoamInsulationPage() {
             <div className="grid items-center gap-10 lg:grid-cols-2">
               <div>
                 <h2 className="text-4xl font-bold">
-                  Ready to improve your building’s comfort and efficiency?
+                  Ready to improve your building&apos;s comfort and efficiency?
                 </h2>
 
                 <p className="mt-5 text-lg leading-8 text-neutral-300">

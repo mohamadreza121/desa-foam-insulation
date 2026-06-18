@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -71,6 +72,44 @@ const projectImages = [
     image: "/images/projects/project-06.jpg",
   },
 ];
+
+
+export const metadata: Metadata = {
+  title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+  description:
+    "DESA Foam Insulation provides spray foam, attic and batt insulation, drywall, steel framing, fireproofing, and concrete lifting across Toronto and the GTA.",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+    description:
+      "Professional insulation and construction services for residential and commercial projects across Toronto and the GTA.",
+    url: "https://desafoaminsulation.com",
+    siteName: "DESA Foam Insulation",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DESA Foam Insulation",
+      },
+    ],
+    locale: "en_CA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spray Foam Insulation Toronto & GTA | DESA Foam Insulation",
+    description:
+      "Professional insulation and construction services across Toronto and the GTA.",
+    images: ["/images/logo.png"],
+  },
+};
 
 export default function HomePage() {
   const localBusinessSchema = {

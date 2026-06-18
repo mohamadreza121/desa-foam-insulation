@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Fireproofing";
 const serviceSlug = "/services/fireproofing";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/fire-proofing-hero.jpg";
+
+const pageTitle = "Fireproofing Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
   "Professional fireproofing services in Toronto and the GTA using fire-resistant materials to help protect structural elements and support code compliance.";
 
 export const metadata: Metadata = {
-  title: "Fireproofing Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Fireproofing Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Fireproofing service by DESA Foam Insulation",
+        alt: "Professional fireproofing service in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Fireproofing Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function FireproofingPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Spray-applied fireproofing and structural fire protection",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function FireproofingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +167,7 @@ export default function FireproofingPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -125,10 +199,11 @@ export default function FireproofingPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/fire-proofing-hero.jpg"
-                alt="Spray-applied fireproofing on structural steel"
+                src={serviceImage}
+                alt="Spray-applied fireproofing on structural steel in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -152,7 +227,7 @@ export default function FireproofingPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation provides professional fireproofing
+                  DESA Foam Insulation provides professional fireproofing
                   services using high-quality fire-resistant materials and
                   proven application techniques. Our skilled team helps protect
                   structural elements from heat and flame.
@@ -161,7 +236,7 @@ export default function FireproofingPage() {
                 <p>
                   Whether your project is new construction or an upgrade to meet
                   safety requirements, we deliver precise and dependable
-                  fireproofing solutions tailored to the building’s needs.
+                  fireproofing solutions tailored to the building&apos;s needs.
                 </p>
               </div>
             </div>
@@ -202,6 +277,7 @@ export default function FireproofingPage() {
                   alt="Worker applying fireproofing material to structural steel"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -212,13 +288,13 @@ export default function FireproofingPage() {
 
                   <p className="mt-5 leading-8 text-neutral-700">
                     Fireproofing helps safeguard buildings and occupants by
-                    slowing the spread of heat and flame during a fire. Properly
-                    applied fire-resistant materials can help protect key
-                    structural components.
+                    slowing the effects of heat and flame during a fire.
+                    Properly applied fire-resistant materials can help protect
+                    important structural components.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    This added protection can provide critical extra time for
+                    This added protection can provide valuable extra time for
                     evacuation, emergency response, and damage reduction.
                   </p>
                 </div>
@@ -230,25 +306,25 @@ export default function FireproofingPage() {
                   alt="Close-up of spray-applied fireproofing material"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Code-Compliant & Reliable
+                    Code-Compliant &amp; Reliable
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    We complete fireproofing work with attention to local
-                    building codes, safety standards, and project requirements.
-                    Our solutions are selected based on the structure and
-                    application needs.
+                    We complete fireproofing work with attention to applicable
+                    building codes, safety standards, manufacturer
+                    requirements, and project specifications.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
                     From spray-applied fire-resistive materials to protective
-                    coating systems, Desa Foam delivers long-lasting protection
-                    with professional workmanship.
+                    coating systems, DESA Foam Insulation delivers dependable
+                    protection with professional workmanship.
                   </p>
                 </div>
               </article>

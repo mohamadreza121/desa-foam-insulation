@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Drywall Installation & Finishing";
 const serviceSlug = "/services/drywall";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/drywall-hero.jpg";
+
+const pageTitle = "Drywall Contractor Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
   "Professional drywall installation, taping, mudding, sanding, repair, and finishing services in Toronto and the GTA for residential and commercial projects.";
 
 export const metadata: Metadata = {
-  title: "Drywall Contractor Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Drywall Contractor Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Drywall installation and finishing by DESA Foam Insulation",
+        alt: "Professional drywall installation and finishing in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Drywall Contractor Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function DrywallPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Drywall installation, taping, mudding, sanding, repair, and finishing",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Drywall",
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function DrywallPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,18 +167,18 @@ export default function DrywallPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
-                Drywall Installation & Finishing
+                Drywall Installation &amp; Finishing
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
                 Professional drywall installation, repair, taping, mudding, and
                 finishing for residential and commercial projects. With over 20
-                years of experience, Desa Foam delivers clean, smooth, and
-                reliable results.
+                years of experience, DESA Foam Insulation delivers clean,
+                smooth, and reliable results.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -126,10 +200,11 @@ export default function DrywallPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/drywall-hero.jpg"
-                alt="Drywall construction site with work lights"
+                src={serviceImage}
+                alt="Professional drywall installation and finishing in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -152,10 +227,11 @@ export default function DrywallPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation specializes in drywall services for new
-                  construction, renovations, commercial spaces, and repair
-                  projects. Our skilled team handles the full process from board
-                  installation to taping, mudding, sanding, and finishing.
+                  DESA Foam Insulation provides professional drywall services
+                  for new construction, renovations, commercial spaces, and
+                  repair projects. Our skilled team handles the complete process
+                  from board installation to taping, mudding, sanding, and final
+                  finishing.
                 </p>
 
                 <p>
@@ -199,9 +275,10 @@ export default function DrywallPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/drywall-process.jpg"
-                  alt="Large drywall room prepared for finishing"
+                  alt="Drywall room prepared for professional finishing"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -213,8 +290,8 @@ export default function DrywallPage() {
                   <p className="mt-5 leading-8 text-neutral-700">
                     Our process begins with accurate measuring and cutting to
                     ensure each drywall sheet fits properly. We secure the
-                    panels to framing using quality fasteners, then tape, mud,
-                    and sand the joints for a clean, seamless finish.
+                    panels to the framing using quality fasteners, then tape,
+                    mud, and sand the joints for a clean, seamless finish.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
@@ -227,15 +304,16 @@ export default function DrywallPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/drywall-repair.png"
-                  alt="Workers installing drywall panels"
+                  alt="Professional drywall repair and panel installation"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Drywall Repair & Patching
+                    Drywall Repair &amp; Patching
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">

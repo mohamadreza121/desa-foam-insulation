@@ -6,74 +6,147 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Attic Insulation";
 const serviceSlug = "/services/attic-insulation";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/attic-insulation-hero.jpg";
+
+const pageTitle = "Attic Insulation Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
-  "Professional attic insulation services in Toronto and the GTA, including insulation installation and top-ups to improve comfort, reduce heat loss, and lower energy costs.";
+  "Professional attic insulation installation and top-up services in Toronto and the GTA. Improve home comfort, reduce heat loss, and lower energy costs with DESA Foam Insulation.";
 
 export const metadata: Metadata = {
-  title: "Attic Insulation Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Attic Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Attic insulation service by DESA Foam Insulation",
+        alt: "Professional attic insulation service in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Attic Insulation Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function AtticInsulationPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType: "Attic insulation installation and top-ups",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +155,7 @@ export default function AtticInsulationPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -125,10 +198,11 @@ export default function AtticInsulationPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/attic-insulation-hero.jpg"
-                alt="Attic with blown-in insulation installed"
+                src={serviceImage}
+                alt="Professional attic insulation installation in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />

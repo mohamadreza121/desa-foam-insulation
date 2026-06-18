@@ -6,74 +6,147 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Attic Insulation Removal";
 const serviceSlug = "/services/attic-insulation-removal";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/attic-insulation-removal.jpeg";
+
+const pageTitle = "Attic Insulation Removal Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
   "Safe attic insulation removal services in Toronto and the GTA for old, damaged, contaminated, moldy, pest-affected, or inefficient insulation.";
 
 export const metadata: Metadata = {
-  title: "Attic Insulation Removal Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Attic Insulation Removal Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Attic insulation removal service by DESA Foam Insulation",
+        alt: "Professional attic insulation removal service in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Attic Insulation Removal Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function AtticInsulationRemovalPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType: "Attic insulation removal and attic cleanup",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +155,7 @@ export default function AtticInsulationRemovalPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +166,7 @@ export default function AtticInsulationRemovalPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -102,8 +175,9 @@ export default function AtticInsulationRemovalPage() {
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
                 Safe and efficient attic insulation removal for old, damaged,
-                contaminated, or inefficient insulation. Desa Foam prepares your
-                attic for cleaner air, better comfort, and upgraded performance.
+                contaminated, or inefficient insulation. DESA Foam prepares
+                your attic for cleaner air, better comfort, and upgraded
+                performance.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -125,10 +199,11 @@ export default function AtticInsulationRemovalPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/attic-insulation-removal.jpeg"
-                alt="Attic space before insulation removal"
+                src={serviceImage}
+                alt="Professional attic insulation removal in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -152,7 +227,7 @@ export default function AtticInsulationRemovalPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation provides professional attic insulation
+                  DESA Foam Insulation provides professional attic insulation
                   removal for homeowners and businesses replacing outdated,
                   damaged, moldy, pest-affected, or inefficient insulation.
                 </p>
@@ -198,9 +273,10 @@ export default function AtticInsulationRemovalPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/old-or-damaged-insulation-removal.jpg"
-                  alt="Empty attic prepared for insulation removal and replacement"
+                  alt="Old and damaged attic insulation being removed"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -217,9 +293,9 @@ export default function AtticInsulationRemovalPage() {
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    Whether you are upgrading your home or dealing with health
-                    hazards, our team handles the process with care and
-                    professionalism.
+                    Whether you are upgrading your home or dealing with
+                    potential indoor air-quality concerns, our team handles the
+                    removal process with care and professionalism.
                   </p>
                 </div>
               </article>
@@ -227,26 +303,29 @@ export default function AtticInsulationRemovalPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/improving-air-quality-and-efficiency.jpg"
-                  alt="Clean attic space prepared for new insulation"
+                  alt="Clean attic prepared for new energy-efficient insulation"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Improving Air Quality & Efficiency
+                    Improving Air Quality &amp; Efficiency
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Removing outdated insulation helps improve comfort, indoor air
-                    quality, and energy performance. Old insulation can trap dust,
-                    allergens, odors, and moisture, affecting your living space.
+                    Removing outdated insulation can help improve comfort,
+                    indoor air quality, and energy performance. Old insulation
+                    may trap dust, allergens, odors, and moisture that can
+                    affect the surrounding living space.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    Our removal service improves ventilation, prepares the attic
-                    for better insulation, and supports long-term energy savings.
+                    Our removal service prepares the attic for improved
+                    ventilation, effective air sealing, and new insulation that
+                    supports long-term energy savings.
                   </p>
                 </div>
               </article>
@@ -263,8 +342,8 @@ export default function AtticInsulationRemovalPage() {
                 </h2>
 
                 <p className="mt-5 text-lg leading-8 text-neutral-300">
-                  Tell us about your project and our team will review the details
-                  based on scope, location, timeline, and availability.
+                  Tell us about your project and our team will review the
+                  details based on scope, location, timeline, and availability.
                 </p>
               </div>
 

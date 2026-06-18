@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Foam Slab Jacking";
 const serviceSlug = "/services/foam-slab-jacking";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/foam-slab-jacking-hero.png";
+
+const pageTitle = "Foam Slab Jacking Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
-  "Professional foam slab jacking and concrete leveling services in Toronto and the GTA using polyurethane foam to lift sunken driveways, sidewalks, patios, and slabs.";
+  "Professional foam slab jacking and concrete leveling services in Toronto and the GTA using polyurethane foam to lift sunken driveways, sidewalks, patios, and concrete slabs.";
 
 export const metadata: Metadata = {
-  title: "Foam Slab Jacking Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Foam Slab Jacking Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Foam slab jacking and concrete leveling by DESA Foam Insulation",
+        alt: "Foam slab jacking and concrete leveling in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Foam Slab Jacking Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function FoamSlabJackingPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Polyurethane foam slab jacking and concrete leveling",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function FoamSlabJackingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +167,7 @@ export default function FoamSlabJackingPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -101,10 +175,10 @@ export default function FoamSlabJackingPage() {
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
-                Lift and level sunken concrete quickly with professional foam
-                slab jacking. Our polyurethane foam injection process restores
-                driveways, sidewalks, patios, and foundations without costly
-                replacement.
+                Lift and level sunken concrete with professional polyurethane
+                foam slab jacking. Our injection process restores driveways,
+                sidewalks, patios, walkways, and concrete slabs without the
+                disruption of complete replacement.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -126,10 +200,11 @@ export default function FoamSlabJackingPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/foam-slab-jacking-hero.png"
-                alt="Polyurethane foam slab jacking process"
+                src={serviceImage}
+                alt="Polyurethane foam slab jacking and concrete leveling in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -152,23 +227,24 @@ export default function FoamSlabJackingPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation provides professional foam slab jacking
-                  services using high-density polyurethane foam to lift and
-                  level sunken concrete surfaces quickly and effectively.
+                  DESA Foam Insulation provides professional foam slab jacking
+                  services using high-density polyurethane foam to lift,
+                  stabilize, and level sunken concrete surfaces.
                 </p>
 
                 <p>
-                  This minimally invasive process restores safety and appearance
-                  without the expense, demolition, and downtime associated with
-                  full concrete replacement.
+                  This minimally invasive process helps restore safety,
+                  appearance, and proper drainage without the demolition,
+                  expense, and extended downtime associated with full concrete
+                  replacement.
                 </p>
               </div>
             </div>
 
             <div className="mt-16 grid gap-6 md:grid-cols-3">
               {[
-                "Driveways & sidewalks",
-                "Patios & walkways",
+                "Driveways and sidewalks",
+                "Patios and walkways",
                 "Concrete slab leveling",
               ].map((item) => (
                 <div
@@ -198,28 +274,30 @@ export default function FoamSlabJackingPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/efficient-foundation-repair-foam-slab-jacking.png"
-                  alt="Foam slab jacking foundation repair process"
+                  alt="Polyurethane foam being used to lift a sunken concrete slab"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Efficient Foundation Repair
+                    Efficient Concrete Repair
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
                     Foam slab jacking is a fast and cost-effective method for
                     lifting and leveling sunken concrete. Lightweight
-                    polyurethane foam is injected beneath the slab, raising it
-                    back into position.
+                    polyurethane foam is injected through small access holes
+                    beneath the slab, where it expands and raises the concrete
+                    toward its proper position.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    The process minimizes disruption and allows many repairs to
-                    be completed much faster than traditional replacement
-                    methods.
+                    The process minimizes disruption and allows many concrete
+                    repairs to be completed significantly faster than
+                    traditional removal and replacement methods.
                   </p>
                 </div>
               </article>
@@ -227,26 +305,28 @@ export default function FoamSlabJackingPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/long-lasting-foam-slab-jacking.png"
-                  alt="Technician performing polyurethane foam slab lifting"
+                  alt="Technician completing polyurethane foam concrete lifting"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Durable & Long-Lasting Solution
+                    Durable &amp; Long-Lasting Solution
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Expanding polyurethane foam fills voids beneath concrete,
-                    stabilizes the ground, and helps prevent future settling.
+                    Expanding polyurethane foam fills voids beneath the
+                    concrete, stabilizes the slab, and helps reduce further
+                    movement caused by unsupported areas.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    Resistant to moisture and deterioration, foam slab jacking
-                    provides long-term support that helps protect the safety,
-                    functionality, and value of your property.
+                    The lightweight foam is resistant to moisture and provides
+                    dependable support that helps restore the safety,
+                    functionality, and appearance of your concrete surfaces.
                   </p>
                 </div>
               </article>

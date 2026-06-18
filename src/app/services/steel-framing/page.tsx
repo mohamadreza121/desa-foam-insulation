@@ -6,74 +6,148 @@ const siteUrl = "https://desafoaminsulation.com";
 
 const serviceName = "Steel Framing";
 const serviceSlug = "/services/steel-framing";
+const serviceUrl = `${siteUrl}${serviceSlug}`;
 const serviceImage = "/images/services/steel-framing-hero.png";
+
+const pageTitle = "Steel Framing Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
 const serviceDescription =
   "Professional steel framing and steel stud installation services in Toronto and the GTA for residential and commercial construction projects.";
 
 export const metadata: Metadata = {
-  title: "Steel Framing Toronto & GTA | DESA Foam Insulation",
+  title: pageTitle,
   description: serviceDescription,
+
   alternates: {
     canonical: serviceSlug,
   },
+
   openGraph: {
-    title: "Steel Framing Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
-    url: `${siteUrl}${serviceSlug}`,
+    url: serviceUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
         url: serviceImage,
         width: 1200,
         height: 630,
-        alt: "Steel framing service by DESA Foam Insulation",
+        alt: "Professional steel framing and steel stud installation in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Steel Framing Toronto & GTA | DESA Foam Insulation",
+    title: socialTitle,
     description: serviceDescription,
     images: [serviceImage],
   },
 };
 
 export default function SteelFramingPage() {
-  const serviceSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceName,
-    serviceType: serviceName,
-    url: `${siteUrl}${serviceSlug}`,
-    image: `${siteUrl}${serviceImage}`,
-    description: serviceDescription,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        addressCountry: "CA",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: serviceName,
+        serviceType:
+          "Steel framing and steel stud installation for residential and commercial construction",
+        url: serviceUrl,
+        image: `${siteUrl}${serviceImage}`,
+        description: serviceDescription,
+
+        provider: {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "310 Millway Avenue #6",
+            addressLocality: "Concord",
+            addressRegion: "ON",
+            postalCode: "L4K 3W3",
+            addressCountry: "CA",
+          },
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
       },
-    },
-    areaServed: [
-      "Toronto",
-      "GTA",
-      "Concord",
-      "North York",
-      "Scarborough",
-      "Etobicoke",
-      "Mississauga",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: `${siteUrl}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: serviceName,
+            item: serviceUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -82,7 +156,7 @@ export default function SteelFramingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
@@ -93,7 +167,7 @@ export default function SteelFramingPage() {
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-red-400">
-                Desa Foam Insulation
+                DESA Foam Insulation
               </p>
 
               <h1 className="text-5xl font-bold leading-tight md:text-6xl">
@@ -103,8 +177,8 @@ export default function SteelFramingPage() {
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300">
                 Professional steel stud framing services for residential and
                 commercial construction projects. We deliver strong, precise,
-                and durable framing systems built to meet modern building
-                standards.
+                and durable framing systems built to meet modern construction
+                requirements.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -126,10 +200,11 @@ export default function SteelFramingPage() {
 
             <div className="overflow-hidden rounded-3xl shadow-2xl">
               <Image
-                src="/images/services/steel-framing-hero.png"
-                alt="Steel stud framing installation"
+                src={serviceImage}
+                alt="Professional steel stud framing installation in Toronto"
                 width={1000}
                 height={700}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="h-[430px] w-full object-cover"
                 priority
               />
@@ -152,16 +227,18 @@ export default function SteelFramingPage() {
 
               <div className="space-y-6 text-lg leading-8 text-neutral-700">
                 <p>
-                  Desa Foam Insulation specializes in steel framing services for
-                  residential and commercial projects. Our experienced team
-                  installs steel studs and tracks with precision, creating a
-                  strong framework that supports the entire structure.
+                  DESA Foam Insulation provides professional steel framing
+                  services for residential and commercial projects. Our
+                  experienced team installs steel studs and tracks with
+                  precision, creating dependable frameworks for walls, ceilings,
+                  and interior construction systems.
                 </p>
 
                 <p>
                   Whether you are building a new property or renovating an
-                  existing space, we provide dependable framing solutions that
-                  meet building codes and project specifications.
+                  existing space, we provide accurate framing solutions designed
+                  around project specifications and applicable construction
+                  requirements.
                 </p>
               </div>
             </div>
@@ -199,9 +276,10 @@ export default function SteelFramingPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/long-lasting-structure.jpeg"
-                  alt="Steel framing ceiling structure"
+                  alt="Steel framing ceiling structure installed for a construction project"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
@@ -211,16 +289,16 @@ export default function SteelFramingPage() {
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Steel framing provides exceptional strength, straightness,
-                    and durability for both residential and commercial projects.
-                    Unlike wood, steel resists warping, shrinking, pests, and
-                    moisture-related issues.
+                    Steel framing provides strength, dimensional consistency,
+                    and durability for both residential and commercial
+                    projects. Unlike wood, steel does not warp, shrink, or
+                    provide a food source for pests.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    Our team uses high-quality steel components to create
-                    framing systems that remain stable and reliable for years to
-                    come.
+                    Our team uses quality steel components to create framing
+                    systems that remain straight, stable, and dependable
+                    throughout the life of the building.
                   </p>
                 </div>
               </article>
@@ -228,28 +306,29 @@ export default function SteelFramingPage() {
               <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
                 <Image
                   src="/images/services/ideal-for-modern-construction.jpeg"
-                  alt="Steel stud framing installed in modern building"
+                  alt="Steel stud framing installed inside a modern building"
                   width={1000}
                   height={700}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-72 w-full object-cover"
                 />
 
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-neutral-950">
-                    Ideal For Modern Construction
+                    Ideal for Modern Construction
                   </h3>
 
                   <p className="mt-5 leading-8 text-neutral-700">
-                    Lightweight, efficient, and highly adaptable, steel framing
-                    is a preferred solution for modern construction projects
-                    that require clean lines, accuracy, and structural
-                    integrity.
+                    Lightweight, efficient, and adaptable, steel framing is
+                    widely used in modern construction projects requiring clean
+                    lines, accurate layouts, and dependable structural support
+                    for interior systems.
                   </p>
 
                   <p className="mt-4 leading-8 text-neutral-700">
-                    Steel studs work exceptionally well with drywall systems,
-                    commercial interiors, basements, offices, and custom
-                    residential spaces.
+                    Steel studs work well with drywall systems, commercial
+                    interiors, basements, offices, retail spaces, and custom
+                    residential construction.
                   </p>
                 </div>
               </article>

@@ -10,37 +10,47 @@ import {
 } from "lucide-react";
 
 const siteUrl = "https://desafoaminsulation.com";
+const pageSlug = "/contact";
+const pageUrl = `${siteUrl}${pageSlug}`;
+const pageImage = "/images/desa-logo.png";
+
+const pageTitle = "Contact Our Team in Toronto & GTA";
+const socialTitle = `${pageTitle} | DESA Foam Insulation`;
+
+const pageDescription =
+  "Contact DESA Foam Insulation for spray foam, attic insulation, batt insulation, drywall, steel framing, fireproofing, and concrete leveling services in Toronto and the GTA.";
+
+const mapUrl =
+  "https://www.google.com/maps/place/Desa+Foam+Insulation/@43.8015398,-79.5322563,17z/data=!3m1!4b1!4m6!3m5!1s0x882ac516a673ffff:0x4e032c3227d1fa25!8m2!3d43.8015398!4d-79.5296814!16s%2Fg%2F11p5rmly5l?entry=ttu";
 
 export const metadata: Metadata = {
-  title: "Contact DESA Foam Insulation | Toronto & GTA",
-  description:
-    "Contact DESA Foam Insulation for insulation and construction services in Toronto and the GTA. Call, email, or submit a project assessment.",
+  title: pageTitle,
+  description: pageDescription,
+
   alternates: {
-    canonical: "/contact",
+    canonical: pageSlug,
   },
+
   openGraph: {
-    title: "Contact DESA Foam Insulation | Toronto & GTA",
-    description:
-      "Contact DESA Foam Insulation or submit a project assessment for insulation and construction services in Toronto and the GTA.",
-    url: `${siteUrl}/contact`,
+    title: socialTitle,
+    description: pageDescription,
+    url: pageUrl,
     siteName: "DESA Foam Insulation",
     images: [
       {
-        url: "/images/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "DESA Foam Insulation",
+        url: pageImage,
+        alt: "Contact DESA Foam Insulation in Toronto and the GTA",
       },
     ],
     locale: "en_CA",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Contact DESA Foam Insulation | Toronto & GTA",
-    description:
-      "Contact DESA Foam Insulation or submit a project assessment for service in Toronto and the GTA.",
-    images: ["/images/logo.png"],
+    title: socialTitle,
+    description: pageDescription,
+    images: [pageImage],
   },
 };
 
@@ -67,48 +77,146 @@ const contactMethods = [
     description:
       "DESA Foam Insulation serves residential and commercial properties throughout Toronto and the GTA.",
     label: "310 Millway Avenue #6, Concord, ON L4K 3W3",
-    href: "https://www.google.com/maps/place/Desa+Foam+Insulation/@43.8015398,-79.5322563,17z/data=!3m1!4b1!4m6!3m5!1s0x882ac516a673ffff:0x4e032c3227d1fa25!8m2!3d43.8015398!4d-79.5296814!16s%2Fg%2F11p5rmly5l?entry=ttu&g_ep=EgoyMDI2MDYxMy4wIKXMDSoASAFQAw%3D%3D",
+    href: mapUrl,
   },
 ];
 
 export default function ContactPage() {
-  const contactPageSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "Contact DESA Foam Insulation",
-    url: `${siteUrl}/contact`,
-    description:
-      "Contact DESA Foam Insulation for insulation and construction services in Toronto and the GTA.",
-    mainEntity: {
-      "@type": "LocalBusiness",
-      name: "DESA Foam Insulation",
-      url: siteUrl,
-      telephone: "+16479602090",
-      email: "dee@desafoaminsulation.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "310 Millway Avenue #6",
-        addressLocality: "Concord",
-        addressRegion: "ON",
-        postalCode: "L4K 3W3",
-        addressCountry: "CA",
-      },
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ],
-          opens: "07:00",
-          closes: "17:00",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: socialTitle,
+        description: pageDescription,
+
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          name: "DESA Foam Insulation",
+          url: siteUrl,
         },
-      ],
-    },
+
+        mainEntity: {
+          "@id": `${siteUrl}/#business`,
+        },
+      },
+
+      {
+        "@type": "LocalBusiness",
+        "@id": `${siteUrl}/#business`,
+        name: "DESA Foam Insulation",
+        url: siteUrl,
+        image: `${siteUrl}${pageImage}`,
+        telephone: "+16479602090",
+        email: "dee@desafoaminsulation.com",
+        hasMap: mapUrl,
+
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "310 Millway Avenue #6",
+          addressLocality: "Concord",
+          addressRegion: "ON",
+          postalCode: "L4K 3W3",
+          addressCountry: "CA",
+        },
+
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 43.8015398,
+          longitude: -79.5296814,
+        },
+
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+16479602090",
+          email: "dee@desafoaminsulation.com",
+          contactType: "customer service",
+          areaServed: "CA-ON",
+          availableLanguage: "English",
+        },
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "Toronto",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Greater Toronto Area",
+          },
+          {
+            "@type": "City",
+            name: "Concord",
+          },
+          {
+            "@type": "City",
+            name: "North York",
+          },
+          {
+            "@type": "City",
+            name: "Scarborough",
+          },
+          {
+            "@type": "City",
+            name: "Etobicoke",
+          },
+          {
+            "@type": "City",
+            name: "Mississauga",
+          },
+          {
+            "@type": "City",
+            name: "Vaughan",
+          },
+          {
+            "@type": "City",
+            name: "Markham",
+          },
+          {
+            "@type": "City",
+            name: "Richmond Hill",
+          },
+        ],
+
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ],
+            opens: "07:00",
+            closes: "17:00",
+          },
+        ],
+      },
+
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Contact",
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -116,7 +224,7 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactPageSchema),
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
 
@@ -301,11 +409,13 @@ export default function ContactPage() {
                   <p className="text-xl font-black text-dark">
                     Monday – Saturday
                   </p>
+
                   <p className="mt-1 text-lg text-gray-600">
                     7:00 AM – 5:00 PM
                   </p>
 
                   <p className="mt-5 text-xl font-black text-dark">Sunday</p>
+
                   <p className="mt-1 text-lg text-gray-600">Closed</p>
                 </div>
               </div>
