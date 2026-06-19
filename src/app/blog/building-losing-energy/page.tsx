@@ -34,7 +34,7 @@ export default function BuildingLosingEnergyPage() {
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
           <div className="relative h-[350px] md:h-[650px]">
             <Image
-              src="/images/blog/building-losing-energy.jpg"
+              src="/images/blog/energy-loss.jpg"
               alt="Building Energy Loss"
               fill
               priority
