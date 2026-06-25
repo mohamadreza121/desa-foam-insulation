@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
@@ -6,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import RouteProgress from "@/components/animations/RouteProgress";
 
 const siteUrl = "https://desafoaminsulation.com";
+const googleAdsId = "AW-18252116528";
 
 const siteDescription =
   "Professional spray foam insulation, attic insulation, batt insulation, drywall, fireproofing, steel framing, and foam slab jacking services in Toronto and the GTA.";
@@ -46,6 +48,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -60,6 +63,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: siteUrl,
     siteName: "DESA Foam Insulation",
+
     images: [
       {
         url: "/images/desa-logo.png",
@@ -68,6 +72,7 @@ export const metadata: Metadata = {
         alt: "DESA Foam Insulation Toronto and GTA",
       },
     ],
+
     locale: "en_CA",
     type: "website",
   },
@@ -94,6 +99,24 @@ export default function RootLayout({
         {children}
 
         <Footer />
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+
+            gtag("js", new Date());
+            gtag("config", "${googleAdsId}");
+          `}
+        </Script>
       </body>
     </html>
   );
