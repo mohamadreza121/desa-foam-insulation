@@ -10,6 +10,13 @@ import {
   ImagePlus,
 } from "lucide-react";
 
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const services = [
   "Spray Foam Insulation",
   "Drywall",
@@ -97,6 +104,10 @@ export default function ProjectAssessmentClient() {
         );
         return;
       }
+
+      window.gtag?.("event", "conversion", {
+        send_to: "AW-18252116528/-1RlCPya3sUcELDkpP9D",
+      });
 
       form.reset();
       setSuccess(true);
