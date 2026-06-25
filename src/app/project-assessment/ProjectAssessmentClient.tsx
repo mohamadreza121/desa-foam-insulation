@@ -105,19 +105,29 @@ export default function ProjectAssessmentClient() {
         return;
       }
 
-      window.gtag?.("event", "conversion", {
-        send_to: "AW-18252116528/-1RlCPya3sUcELDkpP9D",
-      });
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "conversion", {
+          send_to: "AW-18252116528/-1RlCPya3sUcELDkpP9D",
+          event_callback: () => {
+            console.log("Google Ads conversion confirmed");
+          },
+          event_timeout: 2000,
+        });
+
+        console.log("Google Ads conversion event fired");
+      } else {
+        console.error("Google Ads gtag is not available");
+      }
 
       form.reset();
       setSuccess(true);
-    } catch {
-      setError(
-        "We could not submit your request. Please check your connection and try again."
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+      } catch {
+        setError(
+          "We could not submit your request. Please check your connection and try again."
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
   }
 
   return (
