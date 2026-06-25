@@ -18,75 +18,95 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  function closeMenu() {
+    setIsOpen(false);
+  }
+
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-black/75 backdrop-blur-md">
-      <div className="container-custom flex h-24 items-center justify-between">
-        <Link href="/" className="relative h-16 w-52">
+    <header className="fixed left-0 top-0 z-50 w-full bg-black/80 backdrop-blur-md">
+      <div className="container-custom relative flex h-20 items-center justify-between gap-3 sm:h-24">
+        {/* Logo */}
+        <Link
+          href="/"
+          onClick={closeMenu}
+          className="relative h-12 w-36 shrink-0 sm:h-16 sm:w-52"
+          aria-label="DESA Foam Insulation homepage"
+        >
           <Image
             src="/images/desa-logo.png"
             alt="DESA Foam Insulation"
             fill
-            sizes="208px"
+            sizes="(max-width: 640px) 144px, 208px"
             priority
             className="object-contain"
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        {/* Desktop navigation */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-semibold text-white transition hover:text-primary"
+              className="whitespace-nowrap font-semibold text-white transition hover:text-primary"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
+        {/* Desktop CTA */}
         <Link
           href="/project-assessment"
-          className="rounded-lg bg-primary px-5 py-3 font-bold text-white transition hover:bg-red-700"
+          className="ml-auto hidden shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-5 py-3 font-bold text-white transition hover:bg-red-700 xl:inline-flex"
         >
           Start a Project
         </Link>
 
-        <button
-          className="text-white lg:hidden"
-          onClick={() => setIsOpen((value) => !value)}
-          aria-label="Open menu"
-        >
-          {isOpen ? <X size={30} /> : <Menu size={30} />}
-        </button>
+        {/* Tablet and mobile controls */}
+        <div className="ml-auto flex shrink-0 items-center gap-2 xl:hidden">
+          <Link
+            href="/project-assessment"
+            onClick={closeMenu}
+            className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-3 py-2 text-xs font-bold text-white transition hover:bg-red-700 sm:px-4 sm:py-2.5 sm:text-sm"
+          >
+            Start a Project
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((value) => !value)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-white"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.nav
-            initial={{ opacity: 0, y: -18 }}
+            id="mobile-navigation"
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            className="bg-black px-6 py-8 lg:hidden"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.2 }}
+            className="border-t border-white/10 bg-black px-6 py-7 xl:hidden"
           >
-            <div className="flex flex-col gap-6">
+            <div className="container-custom flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-lg font-semibold text-white"
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeMenu}
+                  className="text-lg font-semibold text-white transition hover:text-primary"
                 >
                   {link.label}
                 </Link>
               ))}
-              
-              <Link
-                href="/project-assessment"
-                className="rounded-lg bg-primary px-5 py-3 text-center font-semibold text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                Start a Project
-              </Link>
             </div>
           </motion.nav>
         )}
